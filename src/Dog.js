@@ -15,13 +15,15 @@ class Dog extends Component {
       breed: this.props.breed,
       weight: this.props.weight,
       age: '',
-      lastPoop: ''
+      lastPoop: '',
     };
     
-    console.log(this.props.age);
+    //console.log(this.props.age);
     this.getSex = this.getSex.bind(this);
     this.getAge = this.getAge.bind(this);
     this.getLatestPoop = this.getLatestPoop.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
   
   componentDidMount = () => {
@@ -70,19 +72,72 @@ class Dog extends Component {
     });
   }
   
+  handleClick = (e) => {
+    this.props.onDogClick(this.props.id);
+  }
+  
+  handleAdd = (e) => {
+    let dogID = this.state.id;
+    let token = this.props.token;
+    e.stopPropagation();
+    
+    if (window.confirm('Please confirm poop.')) {
+      axios.post('http://localhost/api/add_poop_now.php', {
+        dogID: dogID
+      }, {
+       headers: {
+         Authorization: 'Bearer ' + token,
+       } 
+      })
+      .then((response) => {
+        //console.log('RESPONSE: ');
+        //console.log(response);
+        console.log(response.data);
+        this.getLatestPoop();
+      })
+      .catch((error) => {
+        console.log('ERROR: ');
+        console.log(error);
+      });
+    
+      
+    }
+    
+  }
+  
   
   render() {
-    return(
-      <tr className='dogCard' onClick={()=> alert("Dog's Page!")}>
-        <td>{this.state.name}</td>
-        <td>{this.state.sex}</td>
-        <td>{this.props.breed}</td>
-        <td>{this.props.weight} lbs</td>
-        <td>{this.state.age}</td>
-        <td><PoopTimer lastPoop={this.state.lastPoop}/></td>
-        <td><button onClick={()=> alert("Add Poop!")}>Add Poop</button></td>
-      </tr>
-    )
+    if (this.props.clicked) {
+      return(
+        <>
+        <div className='dogCard' onClick={this.handleClick}>
+          <h3>{this.state.name}</h3>
+          <PoopTimer lastPoop={this.state.lastPoop}/>
+          <button onClick={this.handleAdd}>Add Poop</button>
+        </div>
+        <div className='dogInfoPanel'>
+          <p>Sex: {this.state.sex}</p>
+          <p>Breed: {this.state.breed}</p>
+          <p>Weight: {this.state.weight}</p>
+          <p>Age: {this.state.age}</p>
+        </div>
+        
+          
+        
+        
+        </>
+      )
+    }
+    else {
+      return(
+        <div className='dogCard' onClick={this.handleClick}>
+          {this.state.name}
+          <PoopTimer lastPoop={this.state.lastPoop}/>
+          <button onClick={this.handleAdd}>Add Poop</button>
+        </div>
+      )
+    }
+    
   }
   
   

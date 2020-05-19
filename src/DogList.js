@@ -13,6 +13,7 @@ class DogList extends Component {
     };
     
     this.getDogs = this.getDogs.bind(this);
+    //this.dogClick = this.dogClick.bind(this);
   }
   
   componentDidMount() {
@@ -33,8 +34,13 @@ class DogList extends Component {
       //console.log(response);
       console.log(response.data);
       this.setState({
-        dogsList: response.data.map((dog) => <Dog key={dog.dogID} id={dog.dogID} name={dog.name} sex={dog.sex} breed={dog.breed} weight={dog.weight} age={dog.age} token={this.props.token}/>)
+        dogsList: response.data.map(dog => ({
+          ...dog,
+          clicked: false,
+        })),
       });
+        console.log('doglist: ');
+        console.log(this.state.dogsList);
     })
     .catch((error) => {
       console.log('ERROR: ');
@@ -42,15 +48,43 @@ class DogList extends Component {
     });
     
   }
+          
+  dogClick = (id) => {
+      let dogs = this.state.dogsList;
+      console.log('dog clicked - id: ' + id);
+      dogs.forEach( (dog) => {
+        if (dog.dogID === id) {
+          if (dog.clicked) {dog.clicked = false}
+          else {
+            console.log('clicked set to true');
+            dog.clicked = true;
+          }
+          
+        }
+        else {
+          console.log('clicked set to false');
+          dog.clicked = false;
+        }
+      });
+    
+      this.setState({
+        dogsList: dogs
+      });
+    
+    }
+          
+          
+          
   
   render() {
+    
     return(
-      <div>
+      <div id='dogListWrapper'>
         <h2>My Pack: </h2>
-        <table className='dogList'>
-          <thead><tr><th>Name</th><th>Sex</th><th>Breed</th><th>Weight</th><th>Age</th><th>Last Poop</th></tr></thead>
-          <tbody>{this.state.dogsList}</tbody>
-        </table>
+        <div className='dogList'>
+          {this.state.dogsList.map((dog) => (
+              <Dog key={dog.dogID} id={dog.dogID} name={dog.name} sex={dog.sex} breed={dog.breed} weight={dog.weight} age={dog.age} token={this.props.token} clicked={dog.clicked} onDogClick={this.dogClick}/>))}
+        </div>
       </div>
     )
   }

@@ -6,11 +6,24 @@ class TopBar extends Component {
   }
   
   render() {
-    return (
-      <div id='topBar'>
-        <h1>The PoopTracker</h1>
-      </div>
-    )
+    if (this.props.logged_in) {
+      return (
+        <div id='topBarLogged'>
+          <span id='topLeftMenu' onClick={this.props.toggleSideBar}><h2>Menu</h2></span>
+          <h1>The PoopTracker</h1>
+          <span id='topRightMenu'></span>
+        </div>
+      )
+    }
+    
+    else {
+      return (
+        <div id='topBar'>
+          <h1>The PoopTracker</h1>
+        </div>
+      ) 
+    }
+    
   }
 }
 

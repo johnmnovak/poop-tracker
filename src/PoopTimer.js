@@ -26,7 +26,7 @@ class PoopTimer extends Component {
       return( 
         <p>
           <Moment format='h:mm A ddd DD MMM YYYY'>{this.props.lastPoop}</Moment><br/>
-          <span className='timer'><Moment date={this.props.lastPoop} durationFromNow/></span>
+          <span className='timer'><Moment date={this.props.lastPoop} fromNow/></span>
         </p>
       )  
     }
