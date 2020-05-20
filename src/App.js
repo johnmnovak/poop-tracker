@@ -169,6 +169,11 @@ class App extends Component {
       return(
         <div className='AppContainer'>
           <TopBar />
+          <Login
+            onEmailChange={this.changeEmail}
+            onPwdChange={this.changePwd}
+            attemptLogin={this.attemptLogin}
+          />
         </div>
       )
     }

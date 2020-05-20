@@ -14,6 +14,7 @@ class DogList extends Component {
     
     this.getDogs = this.getDogs.bind(this);
     //this.dogClick = this.dogClick.bind(this);
+    this.handleAddDog = this.handleAddDog.bind(this);
   }
   
   componentDidMount() {
@@ -72,13 +73,32 @@ class DogList extends Component {
       });
     
     }
+  
+  handleAddDog = () => {
+    this.props.handleActionChange('add_dog');
+  }
           
           
           
   
   render() {
     
-    return(
+    if (this.state.dogsList.length === 0) {
+      return(
+        <div id='dogListWrapper'>
+          <h2>My Pack: </h2>
+          <div className='dogList'>
+            <p>
+              Your pack is empty!<br /><br />
+              <button onClick={this.handleAddDog}>Add Dog</button>
+            </p>
+          </div>
+        </div>
+      )
+      
+    }
+    else {
+      return(
       <div id='dogListWrapper'>
         <h2>My Pack: </h2>
         <div className='dogList'>
@@ -86,7 +106,8 @@ class DogList extends Component {
               <Dog key={dog.dogID} id={dog.dogID} name={dog.name} sex={dog.sex} breed={dog.breed} weight={dog.weight} age={dog.age} token={this.props.token} clicked={dog.clicked} onDogClick={this.dogClick}/>))}
         </div>
       </div>
-    )
+    ) 
+    }
   }
   
 }

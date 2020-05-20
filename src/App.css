@@ -1,7 +1,7 @@
 body {
   display: flex;
   justify-content: center;
-  background-color: gray;
+  background-color: white;
   min-height: 100em;
 }
 
@@ -12,7 +12,7 @@ body {
 }
 
 .AppContainer {
-  background-color: darkgray;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,23 +23,25 @@ body {
 #mainWrapper {
   display: flex;
   justify-content: center;
-  width: 100%;
   padding: 2em;
   border-radius: 5px;
+  min-width: 75%;
 }
 
 #topBarLogged {
   display: flex;
-  background-color: white;
+  background-color: navy;
   justify-content: space-between;
-  color: black;
+  color: white;
   width: 100%;
   max-height: 5em;
+  border: solid 0.5em navy;
 }
 
 #topBar {
   width: 100%;
-  background-color: white;
+  background-color: navy;
+  color: white;
   display: flex;
   justify-content: center;
 }
@@ -61,6 +63,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  min-width: 8em;
 }
 
 .sideBar {
@@ -78,7 +81,6 @@ body {
   position: fixed;
   margin-top: -2em;
   left: 0;
-  padding: 1em;
 }
 
 .sideBar.show {
@@ -108,26 +110,56 @@ body {
 
 .dogCard {
   box-shadow: 5px 5px 10px 5px #d9d9d9;
+  background-color: white;
   height: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   font-size: 20px;
   align-items: center;
   margin: 1.5em 1em;
   border-radius: 5px;
 }
 
+.dogCard p {
+  flex-grow: 3;
+  text-align: center;
+}
+
+.poopButtonWrapper {
+  min-width: 10em;
+  text-align: center;
+}
+
+.poopButtonWrapper button {
+  min-height: 2.5em;
+  border-radius: 5px;
+  border: 2px solid #009900;
+  background-color: #00cc00;
+}
+
+.dogName {
+  height: 100%;
+  min-width: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00ace6;
+  border-radius: 5px 0px 0px 5px;
+}
+
 .dogInfoPanel {
   box-shadow: 5px 5px 10px 5px #d9d9d9;
+  background-color: white;
   height: auto;
   width: auto;
-  margin-top: -1.5em;
+  margin-top: -2em;
   margin-left: 2em;
   margin-right: 1.25em;
   padding-top: 1.0em;
   padding-bottom: 1.0em;
   padding-left: 1.0em;
   border-radius: 5px;
+  z-index: -1;
 }
 
 .login {
@@ -157,7 +189,7 @@ body {
 }
 
 #dogListWrapper {
-  background-color: white;
+  background-color: rgba(200, 200, 200, 0.75);
   border-radius: 5px;
   height: auto;
   overflow: auto;
@@ -173,6 +205,18 @@ body {
 
 .timer {
   color: red;
+}
+
+#createDogForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formRow {
+  min-width: 20em;
+  margin: 0.25em;
 }
 
 @media (prefers-reduced-motion: no-preference) {

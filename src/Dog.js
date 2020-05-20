@@ -111,9 +111,9 @@ class Dog extends Component {
       return(
         <>
         <div className='dogCard' onClick={this.handleClick}>
-          <h3>{this.state.name}</h3>
+          <div className='dogName'><h3>{this.state.name}</h3></div>
           <PoopTimer lastPoop={this.state.lastPoop}/>
-          <button onClick={this.handleAdd}>Add Poop</button>
+          <div className='poopButtonWrapper'><button onClick={this.handleAdd}>Add Poop</button></div>
         </div>
         <div className='dogInfoPanel'>
           <p>Sex: {this.state.sex}</p>
@@ -131,9 +131,9 @@ class Dog extends Component {
     else {
       return(
         <div className='dogCard' onClick={this.handleClick}>
-          {this.state.name}
+          <div className='dogName'>{this.state.name}</div>
           <PoopTimer lastPoop={this.state.lastPoop}/>
-          <button onClick={this.handleAdd}>Add Poop</button>
+          <div className='poopButtonWrapper'><button onClick={this.handleAdd}>Add Poop</button></div>
         </div>
       )
     }

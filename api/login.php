@@ -14,6 +14,8 @@ header('Access-Control-Allow-Headers: content-type, Access-Control-Allow-Headers
 $email = '';
 $password = '';
 
+//echo $_SERVER['REQUEST_METHOD'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   http_response_code(200);
   echo json_encode(array('message' => 'Options are gay.'));
